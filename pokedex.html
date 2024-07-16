@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pokedex</title>
+        <link href="pokedex.css" rel="stylesheet">
+        <script src="pokedex.js"></script>
+    </head>
+    <body>
+        <div id="content-box">
+            <!--Left side, displays the pokemon info-->
+            <div id="pokemon-info">
+                <input type="text" id="search-bar" placeholder="Search Pokemon">
+                <img id="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
+                <div id="pokemon-types"> 
+                    <span class="type-box grass">GRASS</span><span class="type-box poison">POISON</span>
+                </div>
+                <div id="pokemon-description"></div>
+                <div id="pokemon-name"></div>
+                <div id="title-and-credentials">Pokédex by Rohit Sangishetty</div>
+            </div>
+            <!--right side, displays the pokemon list-->
+            <div id="pokemon-list"></div>
+        </div> 
+    </body>
+</html>
