@@ -21,10 +21,7 @@ window.onload = async function() {
     document.getElementById("pokemon-name").innerText = pokedex[1]["name"].toUpperCase();
     //ensures bulbasaur's name is present when the page loads
 
-    document.getElementById("search-bar").addEventListener("keypress", searchPokemon());
-        if (event.key = "Enter") {
-            searchPokemon()
-        }
+    document.getElementById("search-bar").addEventListener("keydown", searchPokemon());
     }
     
 
