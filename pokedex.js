@@ -12,7 +12,7 @@ window.onload = async function() {
         pokemon.id = i;
         pokemon.innerText = i.toString() + ". " + pokedex[i]["name"].toUpperCase(); //creates the string of pokemon: 1.bulbasaur 2.ivsaur, etc.
         pokemon.classList.add("pokemon-name");
-        pokemon.addEventListener("click", updatePokekmon);
+        pokemon.addEventListener("click", updatePokemon);
         document.getElementById("pokemon-list").append(pokemon); //basically is just appending each pokemon of the div into the pokemon-list in HTML
     }
 
@@ -21,14 +21,13 @@ window.onload = async function() {
     document.getElementById("pokemon-name").innerText = pokedex[1]["name"].toUpperCase();
     //ensures bulbasaur's name is present when the page loads
 
-    const enter = new KeyboardEvent('keydown', {
-        key: 'Enter',
-        code: 'Enter',
-        which: 13,
-        keyCode: 13,
-    })
-    document.getElementById("search-bar").addEventListener(enter, searchPokemon());
-    }
+ //   const enter = new KeyboardEvent('keydown', {
+ //       key: 'Enter',
+ //       code: 'Enter',
+ //       which: 13,
+ //       keyCode: 13,
+ //   })
+}
     
 
 async function getPokemon(num) {
@@ -52,44 +51,17 @@ async function getPokemon(num) {
 }
 
 
+
 function searchPokemon(){
     let searchTerm = document.getElementById("search-bar").value.toLowerCase();
     for (let id in pokedex) {
         if (pokedex[id]["name"] === searchTerm) {
-            updatePokemon_search(id);
+            updatePokemon();
         }
     }
 }
 
-updatePokemon_search(){
-    document.getElementById("pokemon-img").src = pokedex[searchTerm.id]["img"]; //goes through the dictionary and pulls the img for the pokemon you click on  
-
-
-    //clear previous type
-    let typesDiv = document.getElementById("pokemon-types");
-    while (typesDiv.firstChild) {
-    typesDiv.firstChild.remove();
-    }
-
-    //update types
-    let types = pokedex[searchTerm.id]["types"];
-    for (let i = 0; i < types.length; i++) {
-    let type = document.createElement("span");
-    type.innerText = types[i]["type"]["name"].toUpperCase();
-    type.classList.add("type-box");
-    type.classList.add(types[i]["type"]["name"]); 
-    //adds the background color and font color of each type......For example, if the type is "fire", it adds the class "fire". This can be used to apply specific styles to the element based on the type, such as background color and font color.
-    typesDiv.append(type);
-    }
-
-    //update description
-    document.getElementById("pokemon-description").innerText = pokedex[searchTerm.id]["desc"];
-
-    //update pokemon name
-    document.getElementById("pokemon-name").innerText = pokedex[searchTerm.id]["name"].toUpperCase();
-}
-
-function updatePokekmon(){
+function updatePokemon(){
     document.getElementById("pokemon-img").src = pokedex[this.id]["img"]; //goes through the dictionary and pulls the img for the pokemon you click on  
 
 
