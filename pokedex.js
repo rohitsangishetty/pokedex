@@ -21,7 +21,13 @@ window.onload = async function() {
     document.getElementById("pokemon-name").innerText = pokedex[1]["name"].toUpperCase();
     //ensures bulbasaur's name is present when the page loads
 
-    document.getElementById("search-bar").addEventListener("keydown", searchPokemon());
+    const enter = new KeyboardEvent('keydown', {
+        key: 'Enter',
+        code: 'Enter',
+        which: 13,
+        keyCode: 13,
+    })
+    document.getElementById("search-bar").addEventListener(enter, searchPokemon());
     }
     
 
@@ -43,6 +49,44 @@ async function getPokemon(num) {
     pokemonDesc = pokemonDesc["flavor_text_entries"][1]["flavor_text"]
 
     pokedex[num] = {"name" : pokemonName, "img" : pokemonImg, "types" : pokemonType, "desc": pokemonDesc}
+}
+
+
+function searchPokemon(){
+    let searchTerm = document.getElementById("search-bar").value.toLowerCase();
+    for (let id in pokedex) {
+        if (pokedex[id]["name"] === searchTerm) {
+            updatePokemon_search(id);
+        }
+    }
+}
+
+updatePokemon_search(){
+    document.getElementById("pokemon-img").src = pokedex[searchTerm.id]["img"]; //goes through the dictionary and pulls the img for the pokemon you click on  
+
+
+    //clear previous type
+    let typesDiv = document.getElementById("pokemon-types");
+    while (typesDiv.firstChild) {
+    typesDiv.firstChild.remove();
+    }
+
+    //update types
+    let types = pokedex[searchTerm.id]["types"];
+    for (let i = 0; i < types.length; i++) {
+    let type = document.createElement("span");
+    type.innerText = types[i]["type"]["name"].toUpperCase();
+    type.classList.add("type-box");
+    type.classList.add(types[i]["type"]["name"]); 
+    //adds the background color and font color of each type......For example, if the type is "fire", it adds the class "fire". This can be used to apply specific styles to the element based on the type, such as background color and font color.
+    typesDiv.append(type);
+    }
+
+    //update description
+    document.getElementById("pokemon-description").innerText = pokedex[searchTerm.id]["desc"];
+
+    //update pokemon name
+    document.getElementById("pokemon-name").innerText = pokedex[searchTerm.id]["name"].toUpperCase();
 }
 
 function updatePokekmon(){
@@ -71,13 +115,4 @@ function updatePokekmon(){
 
     //update pokemon name
     document.getElementById("pokemon-name").innerText = pokedex[this.id]["name"].toUpperCase();
-}
-
-function searchPokemon(){
-    let searchTerm = document.getElementById("search-bar").value.toLowerCase();
-    for (let id in pokedex) {
-        if (pokedex[id]["name"] === searchTerm) {
-            updatePokemon(id);
-        }
-    }
 }
