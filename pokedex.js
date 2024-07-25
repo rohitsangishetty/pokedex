@@ -88,3 +88,5 @@ function updatePokemon(){
     //update pokemon name
     document.getElementById("pokemon-name").innerText = pokedex[this.id]["name"].toUpperCase();
 }
+
+//testing
